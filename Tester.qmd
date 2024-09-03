@@ -1,0 +1,47 @@
+---
+title: "Zotero Reference Sheet"
+author: "Camille Beard"
+date: "2024-09-03"
+format: html
+bibliography: references.bib
+---
+
+# Assignment
+
+turn in 1 equation, 5 references, and 1 graph
+
+## equation:
+
+The slope of a line is:
+
+$$
+y = mx+ b
+$$
+
+## References
+
+[@doroshenko2022]
+
+[@universe]
+
+[@faber2012]
+
+[@lippuner2017]
+
+[@vandenheuvel1992]
+
+## Graph
+
+```{python}
+#| fig-cap: "Equation of x^2 is graphed with x ranging from 0 to 10."
+#| label: fig-GraphFunctionPython
+#| echo: True
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.arange(10)
+y = x**2
+plt.plot(x,y)
+plt.title("x^2")
+plt.show()
+```
