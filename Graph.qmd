@@ -1,0 +1,51 @@
+---
+title: "Graph"
+format: html
+---
+
+```{python}
+import pandas as pd
+
+url = "https://raw.githubusercontent.com/thomasgredig/QuartoBasics-545/31c15c348d2058242416335392c77e929bbe149d/data/NJKC-20160310-NMR.CSV"
+data = pd.read_csv(url, header=None)
+print(data.head())
+```
+
+```{python}
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.scatter(data[3]*1000, data[4], marker='.', color='r')
+ax.set_xlabel('t (ms)')
+ax.set_ylabel('V (V)')
+plt.show()
+```
+
+```{python}
+import numpy as np
+from scipy.optimize import curve_fit
+
+d2 = data[data[3]*1000 > 0.3]
+
+def model(t, V0, T, A):
+    return A + V0 * np.exp(-t / T)
+
+popt, pcov = curve_fit(model, 
+        d2[3]*1000, d2[4], 
+        p0=[1, 0.8, 0.1])
+
+V0, T, A = popt
+V0_err, T_err = np.sqrt(pcov[0,0]), np.sqrt(pcov[1,1])
+print(f"V0: {V0:.6} ± {V0_err:.2} \n T: {T:.6} ± {T_err:.2}")
+```
+
+```{python}
+t = np.arange(0.2,5,0.05)
+V = model(t, V0, T, A)
+fig, ax = plt.subplots()
+ax.scatter(data[3]*1000, data[4], marker='.', color='red')
+ax.plot(t, V, color='blue')
+ax.set_xlabel('t (ms)')
+ax.set_ylabel('V (V)')
+plt.show()
+```
