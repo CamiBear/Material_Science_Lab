@@ -1,0 +1,13 @@
+---
+project:
+  type: website
+  output-dir: _site
+
+website:
+  navbar:
+    background: primary
+    search: true
+    left:
+      - href: Zotero_Reference_Sheet.qmd
+        text: Home
+---
