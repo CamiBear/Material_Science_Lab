@@ -1,0 +1,29 @@
+---
+title: 2D Nanoparticle sample Atomic Force Microscopy measurements
+authors:
+  - name: Camille Beard
+    affiliations: 
+    - name: California State University Long Beach
+      id: 1
+      department: Physics and Astronomy
+      roles: writing
+      corresponding: true
+  - name: Adam Bowen
+    affiliations: 
+    - name: California State University Long Beach
+      id: 2
+      department: Physics and Astronomy
+      roles: writing
+      corresponding: true
+  - name: Jose Chavez
+    affiliations: 
+    - name: California State University Long Beach
+      id: 3
+      department: Physics and Astronomy
+      roles: writing
+      corresponding: true
+bibliography: references.bib
+---
+
+## Section
+This is a simple placeholder for the manuscript's main document [@knuth84].
