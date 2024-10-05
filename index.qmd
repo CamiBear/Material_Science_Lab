@@ -30,7 +30,7 @@ bibliography: MatSciLab.bib
 
 ## Abstract
 
-\indent The Park Systems atomic force microscope was used to obtain images of Au particles, as well as a platinum Ditelluride ($PtTe_{2}$) flake. A height-height correlation function was implemented to analyze the topography of Au particles. The image of the $PtTe_{2}$ flake was further analyzed in order to obtain any well-defined angles of the two-dimensional material flake. It has been determined from the height-height correlation function that the standard deviation ($\sigma$) or the average effective grain size to be 52.11 nm with an uncertainty of 1.235 nm. The Xi fit found Xi to be 835.3 nm with an error of 0.37 nm. The roughness h value is 0.9204 which is very rough. This could be because the surface isn’t even because we are looking at one flake next to a flat surface so we can determine that this isn’t an accurate fit. Starting from the top and going clockwise, the angles of the $PeTe_{2}$ flake we could determine were 123, 96, 244, 159, and 124 degrees.
+\indent The Park Systems atomic force microscope was used to obtain images of Au particles, as well as a platinum Ditelluride ($PtTe_{2}$) flake. A height-height correlation function was implemented to analyze the topography of Au particles. The image of the $PtTe_{2}$ flake was further analyzed in order to obtain any well-defined angles of the two-dimensional material flake. It has been determined from the height-height correlation function that the roughness ($\sigma$) or the average effective grain size to be 52.11 nm with an uncertainty of 1.235 nm. The coherence length, $\xi$, was found to be 835.3 nm with an error of 0.37 nm. The Hurst(H) value is 0.9204. Starting from the top and going clockwise, the angles of the $PeTe_{2}$ flake we could determine were 123, 96, 244, 159, and 124 degrees.
 
 ## Introduction
 
@@ -68,19 +68,27 @@ With all data saved, the clean up procedure was begun. The focal optics were rai
 
 ## Results and Analysis
 
-We used the nanoAFM and ggplot2 packages on R to collect and plot the Park AFM data. The nanoAFM package to open the Park AFM data. Using a height-height correlation function we found the average effective grain size of Au particles and a single $PtTe_2$ flake. The correlation function finds values of standard deviation ($\sigma$), Xi ($\Xi$) from a Xi fit, and the Hurst value (H) which measures the roughness of a surface. We also measured the angles of defined edges of a $PtTe_{2}$ projection using a protractor.
+We used the nanoAFM and ggplot2 packages on R to collect and plot the Park AFM data. The nanoAFM package to open the Park AFM data. Using a height-height correlation function we found the average effective grain size of Au particles and a single $PtTe_2$ flake. The correlation function finds values of roughness ($\sigma$), coherence length ($\xi$), and the Hurst value (H) which is used to measure the persistance of an effective grain. We also measured the angles of defined edges of a $PtTe_{2}$ projection using a protractor. The HHCF is defined as:
 
-![Topological Image and line profile of Au sample 20240913_PHYS545_JCCBAB_AFM_TD20200122Si16_20240913_5.0x5.0+Topography_Backward_004 measuring the particle height in nm in the x (5 um) and y (5 um) plane. The profile has a peak greater that 30 nm.](Au_top.png){#fig-top_au}
+g(r) = \left\langle \left[ h(\vec{x}) - h(\vec{x} - \vec{r}) \right]^2 \right\rangle
+
+When r is the displacement vector. The height correlation fit we used in the data analysis was:
+
+g(r) = 2 \sigma^2 \left[ 1 - e^{-\left( \frac{r}{\xi} \right)^{2\H}} \right]
+
+$\sigma$ is roughness, $\xi$ is coherence length, and H is the Hursh value.
+
+![Topological Image and line profile of Au sample 20240913_PHYS545_JCCBAB_AFM_TD20200122Si16_20240913_5.0x5.0+Topography_Backward_004 measuring the particle height in nm in the x (5 um) and y (5 um) plane. The profile has a peak greater that 30 nm. The HHCF fit is in red.](Au_top.png){#fig-top_au}
 
 Using the nanoAfm package in R we found the height of the gold particles using the profile function. We saw that the gold particles have a roughly uniform shape and are not compact. The gold particle heights hovered around 20 to 30 nm. The difference in heights could be a result of deformation of gold particles after being transferred to the substrate or deformations of the Silicon substrate. 
 
 ![Height-height correlation function (HHCF) of Au Sample 20240913_PHYS545_JCCBAB_AFM_TD20200122Si16_20240913_5.0x5.0+Topography_Backward_004 measuring the average effective grain size of Au particles.](graph1.png){#fig-g fig-align="center"}
 
-Using the nanoAFM package the HHCF found the standard deviation ($\sigma$) or the average effective grain size to be 7.294 nm with an uncertainty of 0.009 nm which is on the order of pm. The weighted fit found Xi to be 89.45 nm with an error of 1.93 nm. The roughness h value is 1.123 which is very rough. This could be because the surface isn’t homogeneous so H isn’t an accurate value for gauging roughness. 
+Using the nanoAFM package the HHCF found the roughness ($\sigma$) of the effective grain size to be 7.294 nm with an uncertainty of 0.009 nm which is on the order of pm. The coherence length, $\xi$, to be 89.45 nm with an error of 1.93 nm. The H value is 1.123. These values could be because the surface isn’t homogeneous so H isn’t an accurate value for gauging roughness. 
 
-![Height-height correlation function of $PtTe_{2}$ sample 20240920_PHYS_JCCBAB_SL20240916_5um_256px_20240920_5.0x5.0+Topography_Forward_005.](graph2.png){#fig-gr1 fig-align="center"}
+![Height-height correlation function of $PtTe_{2}$ sample 20240920_PHYS_JCCBAB_SL20240916_5um_256px_20240920_5.0x5.0+Topography_Forward_005. The HHCF fit is in red.](graph2.png){#fig-gr1 fig-align="center"}
 
-The HHCF found the standard deviation ($\sigma$) or the average effective grain size to be 52.11 nm with an uncertainty of 1.235 nm. The Weighted fit found Xi to be 835.3 nm with an error of 0.37 nm. The roughness h value is 0.9204 which is very rough. This could be because the surface isn’t even because we are looking at one flake next to a flat surface so we can determine that this isn’t an accurate fit. 
+The HHCF found the roughness ($\sigma$) of the average effective grain to be 52.11 nm with an uncertainty of 1.235 nm. The $\xi$ to be 835.3 nm with an error of 0.37 nm. The H value is 0.9204. This could be because the surface isn’t even because we are looking at one flake next to a flat surface so we can determine that the roughness value isn't an accurate fit. 
 
 ::: {#fig-pt layout-ncol="2"}
 ![a) $PtTe_2$ image saved through SmartScan](Pt_top.png){width="889"}
